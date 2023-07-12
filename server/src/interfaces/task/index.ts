@@ -10,3 +10,7 @@ export interface ITaskCreate {
 	status: string;
 	createdAt: string;
 }
+
+export interface ITaskRequest {
+	title: string;
+}
