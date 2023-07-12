@@ -1,6 +1,6 @@
 import connection from '../connection';
 
-import { ITaskCreate } from '../../interfaces/task';
+import { ITaskCreate, ITaskUpdate } from '../../interfaces/task';
 
 const listTasks = async () => {
 	const [tasks] = await connection.execute('SELECT * FROM tasks');
@@ -25,10 +25,20 @@ const deleteTask = async (id: string) => {
 	return removedTask;
 };
 
+const updateTask = async (task: ITaskUpdate) => {
+	const { id, title, status } = task;
+	const query = `UPDATE tasks SET title = '${title}', status = '${status}' WHERE id = ${id}`;
+
+	const updatedTask = await connection.execute(query);
+
+	return updatedTask;
+};
+
 const taskModel = {
 	listTasks,
 	createTask,
 	deleteTask,
+	updateTask,
 };
 
 export default taskModel;

@@ -2,11 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 
 import { ITaskRequest } from '../../interfaces/task';
 
-const validateCreateTaskBody = (
-	req: Request,
-	res: Response,
-	next: NextFunction
-) => {
+const validateTaskBody = (req: Request, res: Response, next: NextFunction) => {
 	const reqBody: ITaskRequest = req.body;
 	const title = reqBody.title;
 
@@ -19,4 +15,4 @@ const validateCreateTaskBody = (
 	next();
 };
 
-export { validateCreateTaskBody };
+export { validateTaskBody };

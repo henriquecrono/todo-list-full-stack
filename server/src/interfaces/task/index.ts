@@ -1,5 +1,5 @@
 export interface ITask {
-	id?: number;
+	id: string;
 	title: string;
 	status: string;
 	createdAt: string;
@@ -13,4 +13,10 @@ export interface ITaskCreate {
 
 export interface ITaskRequest {
 	title: string;
+}
+
+export interface ITaskUpdate {
+	id: string;
+	title: string;
+	status: string;
 }
