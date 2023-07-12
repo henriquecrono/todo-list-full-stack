@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 import { ITaskRequest } from '../../interfaces/task';
 
-import { list, create } from '../../models/task';
+import taskModel from '../../models/task';
 
 const taskStatus = {
 	pending: 'pending',
@@ -10,7 +10,7 @@ const taskStatus = {
 };
 
 const listTasks = async (_req: Request, res: Response) => {
-	const tasks = await list();
+	const tasks = await taskModel.listTasks();
 
 	return res.status(200).json(tasks);
 };
@@ -25,7 +25,7 @@ const createTask = async (req: Request, res: Response) => {
 		createdAt: new Date().toUTCString(),
 	};
 
-	const createdTask = await create(task);
+	const createdTask = await taskModel.createTask(task);
 
 	return res.status(201).json(createdTask);
 };
