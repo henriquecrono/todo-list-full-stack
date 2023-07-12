@@ -4,6 +4,6 @@ import { listTasks } from './controllers/task';
 
 const router = express.Router();
 
-router.get('/tasks', listTasks);
+router.get('/task', listTasks);
 
 export default router;
