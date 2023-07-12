@@ -1,11 +1,33 @@
 import { Request, Response } from 'express';
 
-import { list } from '../../models/task';
+import { ITaskRequest } from '../../interfaces/task';
 
-const listTasks = async (req: Request, res: Response) => {
-	const tasks = await list();
+import { list, create } from '../../models/task';
 
-	res.status(200).json(tasks);
+const taskStatus = {
+	pending: 'pending',
+	done: 'done',
 };
 
-export { listTasks };
+const listTasks = async (_req: Request, res: Response) => {
+	const tasks = await list();
+
+	return res.status(200).json(tasks);
+};
+
+const createTask = async (req: Request, res: Response) => {
+	const reqBody: ITaskRequest = req.body;
+	const title = reqBody.title;
+
+	const task = {
+		title: title,
+		status: taskStatus.pending,
+		createdAt: new Date().toUTCString(),
+	};
+
+	const createdTask = await create(task);
+
+	return res.status(201).json(createdTask);
+};
+
+export { listTasks, createTask };
