@@ -17,9 +17,18 @@ const createTask = async (task: ITaskCreate) => {
 	return createdTask;
 };
 
+const deleteTask = async (id: string) => {
+	const query = `DELETE FROM tasks WHERE id = ${id}`;
+
+	const removedTask = await connection.execute(query);
+
+	return removedTask;
+};
+
 const taskModel = {
 	listTasks,
 	createTask,
+	deleteTask,
 };
 
 export default taskModel;

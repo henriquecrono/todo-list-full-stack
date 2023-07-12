@@ -30,4 +30,12 @@ const createTask = async (req: Request, res: Response) => {
 	return res.status(201).json(createdTask);
 };
 
-export { listTasks, createTask };
+const deleteTask = async (req: Request, res: Response) => {
+	const { id } = req.params;
+
+	await taskModel.deleteTask(id);
+
+	return res.status(204).json(id);
+};
+
+export { listTasks, createTask, deleteTask };
